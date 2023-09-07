@@ -9,19 +9,19 @@ MOODLE="MOODLE_402_STABLE"
 cd /opt
 
 # Download the Moodle code from the git repository
-sudo git clone git://git.moodle.org/moodle.git
+git clone git://git.moodle.org/moodle.git
 
 # Navigate into the downloaded moodle directory
 cd moodle
 
 # List all available branches
-sudo git branch -a
+git branch -a
 
 # Tell git which branch to track
-sudo git branch --track $MOODLE origin/$MOODLE
+git branch --track $MOODLE origin/$MOODLE
 
 # Check out the specified Moodle version
-sudo git checkout $MOODLE
+git checkout $MOODLE
 
 # Print a success message
 echo "Moodle version $MOODLE has been successfully downloaded and setup."
