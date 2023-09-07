@@ -3,7 +3,8 @@
 echo "================================="
 echo "Add Repository"
 echo "================================="
-add-apt-repository ppa:ondrej/php sudo apt-get update
+add-apt-repository ppa:ondrej/php -y
+apt update -y
 
 echo "================================="
 echo "Install mysql-client and php 7 "
