@@ -1,48 +1,27 @@
 Resources:
   MyEC2Instance:
-    Type: "AWS::EC2::Instance"
+    Type: AWS::EC2::Instance
     Properties:
-      InstanceType: "t4g.small"
-      AvailabilityZone: "us-east-1a"
-      KeyName: "kpus1"
-      ImageId: "ami-0a0c8eebcdd6dcbd0"
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash
-
-          # This script sets up a LAMP (Linux, Apache, MySQL, PHP) stack on Ubuntu 22.04.
-          apt update -y 
-          apt install -y apache2 
-          ufw app list
-          ufw allow in "Apache"
-          ufw status
-          apt install -y mysql-server
+      InstanceType: t4g.small
+      KeyName: kpus1.pem
+      ImageId: ami-0a0c8eebcdd6dcbd0
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
       BlockDeviceMappings:
-        - DeviceName: "/dev/sda1"
+        - DeviceName: /dev/sda1
           Ebs:
-            VolumeSize: "8"
+            VolumeSize: 8
 
-  MySecurityGroup:
-    Type: "AWS::EC2::SecurityGroup"
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "New security group for EC2 instance"
-      VpcId: "YourVPCIDHere"
+      GroupDescription: Enable HTTP and SSH
       SecurityGroupIngress:
-        - IpProtocol: "tcp"
-          FromPort: "22"
-          ToPort: "22"
-          CidrIp: "0.0.0.0/0"
-        - IpProtocol: "tcp"
-          FromPort: "80"
-          ToPort: "80"
-          CidrIp: "0.0.0.0/0"
-
-Outputs:
-  InstanceId:
-    Description: "ID of the new EC2 instance"
-    Value: 
-      Ref: "MyEC2Instance"
-  SecurityGroupId:
-    Description: "ID of the new security group"
-    Value: 
-      Ref: "MySecurityGroup"
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
