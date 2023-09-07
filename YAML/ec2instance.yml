@@ -18,13 +18,13 @@ Resources:
           SCRIPT_NAMES=("update" "install-apache2" "config-ufw-ssh" "config-ufw-apache2")
           SCRIPT_DIR="/home/ubuntu"
           # Download, set permissions, and execute the scripts
-          for script_name in "${SCRIPT_NAMES[@]}"; do
-          # Download the script
-          wget "${BASE_URL}/${script_name}.sh" -O "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
-          # Make the script executable
-          chmod +x "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
-          # Execute the script
-          "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+          for script_name in "$${SCRIPT_NAMES[@]}"; do
+            # Download the script
+            wget "$${BASE_URL}/$${script_name}.sh" -O "$${SCRIPT_DIR}/downloaded_script-$${script_name}.sh"
+            # Make the script executable
+            chmod +x "$${SCRIPT_DIR}/downloaded_script-$${script_name}.sh"
+            # Execute the script
+            "$${SCRIPT_DIR}/downloaded_script-$${script_name}.sh"
           done
           
   WebAppSecurityGroup:
