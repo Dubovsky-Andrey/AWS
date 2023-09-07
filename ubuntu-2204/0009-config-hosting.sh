@@ -1,3 +1,4 @@
+#!/bin/bash
 # Replace with your domain and email
 DOMAIN='solarspikesudio.net'
 EMAIL='your_email@example.com'
@@ -9,7 +10,7 @@ mkdir -p "/var/www/$DOMAIN"
 chown -R $USER:$USER "/var/www/$DOMAIN"
 
 # Create Apache config file
-sudo tee "/etc/apache2/sites-available/$DOMAIN.conf" > /dev/null <<EOL
+tee "/etc/apache2/sites-available/$DOMAIN.conf" > /dev/null <<EOL
 <VirtualHost *:80>
     ServerName $DOMAIN
     ServerAlias www.$DOMAIN
