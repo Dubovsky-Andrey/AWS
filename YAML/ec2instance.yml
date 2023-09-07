@@ -20,11 +20,11 @@ Resources:
           # Download, set permissions, and execute the scripts
           for script_name in "${SCRIPT_NAMES[@]}"; do
             # Download the script
-            wget "${BASE_URL}/${script_name}" -O "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+            wget "${BASE_URL}/${script_name}.sh" -O "${SCRIPT_DIR}/script-${script_name}.sh"
             # Make the script executable
-            chmod +x "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+            chmod +x "${SCRIPT_DIR}/script-${script_name}.sh"
             # Execute the script
-            "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+            "${SCRIPT_DIR}/script-${script_name}.sh"
           done
           
   WebAppSecurityGroup:
