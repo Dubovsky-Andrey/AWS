@@ -2,4 +2,4 @@
 echo "================================="
 echo "Install PHP"
 echo "================================="
-sudo apt install php libapache2-mod-php php-mysql
+sudo apt install -y php libapache2-mod-php php-mysql
