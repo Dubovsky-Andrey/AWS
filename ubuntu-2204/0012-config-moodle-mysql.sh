@@ -3,10 +3,10 @@
 # Step 6: Setup MySQL Server
 
 # Edit MySQL configuration file
-sudo sed -i '/\[mysqld\]/a default_storage_engine = innodb\ninnodb_file_per_table = 1\ninnodb_file_format = Barracuda' /etc/mysql/mysql.conf.d/mysqld.cnf
+sed -i '/\[mysqld\]/a default_storage_engine = innodb\ninnodb_file_per_table = 1\ninnodb_file_format = Barracuda' /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Restart MySQL to apply changes
-sudo service mysql restart
+service mysql restart
 
 # MySQL root password
 read -sp "Enter the MySQL root password: " root_password
@@ -24,7 +24,7 @@ mysql -u root -p$root_password -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREA
 # Step 7: Complete Setup
 
 # Make the Moodle directory writable temporarily
-sudo chmod -R 777 /var/www/html/moodle
+chmod -R 777 /var/www/html/moodle
 
 echo "You can now proceed with the web-based setup. Once done, press any key to continue."
 
@@ -32,6 +32,6 @@ echo "You can now proceed with the web-based setup. Once done, press any key to 
 read -n1 -s
 
 # Revert Moodle directory permissions
-sudo chmod -R 0755 /var/www/html/moodle
+chmod -R 0755 /var/www/html/moodle
 
 echo "Setup completed!"
