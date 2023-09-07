@@ -13,30 +13,24 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
-          # Specify the URL of the script on GitHub
-          SCRIPT_UPDATE="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/update.sh"
-          SCRIPT_APACHE2="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/install-apache2.sh"
-          SCRIPT_UFW_SSH="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/config-ufw-ssh"
-          SCRIPT_UFW_APACHE2="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/config-ufw-apache2"
-          ########################################################################################################################
-          # Download the scripts
-          wget $SCRIPT_UPDATE -O /home/ubuntu/downloaded_script-update.sh
-          wget $SCRIPT_APACHE2 -O /home/ubuntu/downloaded_script-apache2.sh
-          wget $SCRIPT_UFW_SSH -O /home/ubuntu/downloaded_script-ufw-ssh.sh
-          wget $SCRIPT_UFW_APACHE2 -O /home/ubuntu/downloaded_script-ufw-apache2.sh
-          ########################################################################################################################
-          # Make the script executable
-          chmod +x /home/ubuntu/downloaded_script-update.sh
-          chmod +x /home/ubuntu/downloaded_script-apache2.sh
-          chmod +x /home/ubuntu/downloaded_script-ufw-ssh.sh
-          chmod +x /home/ubuntu/downloaded_script-ufw-apache2.sh
-          ########################################################################################################################
-          # Run the script
-          /home/ubuntu/downloaded_script-update.sh
-          /home/ubuntu/downloaded_script-apache2.sh
-          /home/ubuntu/downloaded_script-ufw-ssh.sh
-          /home/ubuntu/downloaded_script-ufw-apache2.sh
+          # Base URL and common paths
+          BASE_URL="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204"
+          SCRIPT_NAMES=("update" "install-apache2" "config-ufw-ssh" "config-ufw-apache2")
+          SCRIPT_DIR="/home/ubuntu"
 
+          # Download, set permissions, and execute the scripts
+          for script_name in "${SCRIPT_NAMES[@]}"; do
+
+          # Download the script
+          wget "${BASE_URL}/${script_name}.sh" -O "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+
+          # Make the script executable
+          chmod +x "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+
+          # Execute the script
+          "${SCRIPT_DIR}/downloaded_script-${script_name}.sh"
+          done
+          
   WebAppSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
