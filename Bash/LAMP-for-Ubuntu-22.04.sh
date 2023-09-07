@@ -4,35 +4,38 @@
 # The guide for this script can be found at:
 # https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04
 
-# Update the package list
+echo "Update the package list"
 apt update -y 
 
-# Install the Apache web server
+echo "Install the Apache web server"
 apt install -y apache2 
 
-# Display available UFW application profiles
+echo "Display available UFW application profiles"
 ufw app list
 
-# Allow incoming traffic for Apache in UFW (Uncomplicated Firewall)
+echo "Allow incoming traffic for Apache in UFW (Uncomplicated Firewall)"
 ufw allow in "Apache"
+ufw allow ssh
 
-# Check UFW status to ensure the rule is applied
+
+echo "Check UFW status to ensure the rule is applied"
 ufw status
+ufw enable
 
-# Install MySQL server
+echo "Install MySQL server"
 apt install -y mysql-server
 
-# Change authentication method for root user to 'mysql_native_password' and set the password to 'StrongPassword'
+echo "Change authentication method for root user to 'mysql_native_password' and set the password to 'StrongPassword'"
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'StrongPassword';"
 
-# Secure MySQL installation
+echo "  Secure MySQL installation"
 # - The first 'Y' confirms that you want to set up the VALIDATE PASSWORD plugin
 # - '1' selects medium level password validation
 # - 'StrongPassword' sets the password for the MySQL root user
 # - The remaining 'Y's answer the subsequent security questions
 echo -e "Y\n1\nStrongPassword\nStrongPassword\nY\nY\nY\nY" | mysql_secure_installation
 
-# Check MySQL login
+echo "Check MySQL login"
 mysql -u root -pStrongPassword -e "SELECT user,authentication_string,plugin,host FROM mysql.user;"
 
 # Output confirmation that MySQL setup is complete
