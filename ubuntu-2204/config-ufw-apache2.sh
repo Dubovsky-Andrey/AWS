@@ -7,4 +7,4 @@ ufw app list
 echo "================================="
 echo "Allow in "Apache"
 echo "================================="
-ufw allow in "Apache"
+ufw allow in "Apache
