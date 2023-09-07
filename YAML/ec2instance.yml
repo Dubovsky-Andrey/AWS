@@ -15,13 +15,19 @@ Resources:
           #!/bin/bash -xe
           # Specify the URL of the script on GitHub
           SCRIPT_UPDATE="https://github.com/Dubovsky-Andrey/AWS/blob/main/ubuntu-2204/update.sh"
-          SCRIPT_APACHE2="https://github.com/Dubovsky-Andrey/AWS/blob/main/ubuntu-2204/update.sh"
-          # Download the script
+          SCRIPT_APACHE2="https://github.com/Dubovsky-Andrey/AWS/blob/main/ubuntu-2204/install-apache2.sh"
+          ########################################################################################################################
+          # Download the scripts
           wget $SCRIPT_UPDATE -O downloaded_script-update.sh
+          wget $SCRIPT_APACHE2 -O downloaded_script-apache2.sh
+          ########################################################################################################################
           # Make the script executable
           chmod +x downloaded_script-update.sh
+          chmod +x downloaded_script-apache2.sh
+          ########################################################################################################################
           # Run the script
           ./downloaded_script-update.sh
+          ./downloaded_script-apache2.sh
 
   WebAppSecurityGroup:
     Type: AWS::EC2::SecurityGroup
