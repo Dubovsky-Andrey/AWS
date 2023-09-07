@@ -16,18 +16,26 @@ Resources:
           # Specify the URL of the script on GitHub
           SCRIPT_UPDATE="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/update.sh"
           SCRIPT_APACHE2="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/install-apache2.sh"
+          SCRIPT_UFW_SSH="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/config-ufw-ssh"
+          SCRIPT_UFW_APACHE2="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204/config-ufw-apache2"
           ########################################################################################################################
           # Download the scripts
           wget $SCRIPT_UPDATE -O /home/ubuntu/downloaded_script-update.sh
           wget $SCRIPT_APACHE2 -O /home/ubuntu/downloaded_script-apache2.sh
+          wget $SCRIPT_UFW_SSH -O /home/ubuntu/downloaded_script-ufw-ssh.sh
+          wget $SCRIPT_UFW_APACHE2 -O /home/ubuntu/downloaded_script-ufw-apache2.sh
           ########################################################################################################################
           # Make the script executable
           chmod +x /home/ubuntu/downloaded_script-update.sh
           chmod +x /home/ubuntu/downloaded_script-apache2.sh
+          chmod +x /home/ubuntu/downloaded_script-ufw-ssh.sh
+          chmod +x /home/ubuntu/downloaded_script-ufw-apache2.sh
           ########################################################################################################################
           # Run the script
           /home/ubuntu/downloaded_script-update.sh
           /home/ubuntu/downloaded_script-apache2.sh
+          /home/ubuntu/downloaded_script-ufw-ssh.sh
+          /home/ubuntu/downloaded_script-ufw-apache2.sh
 
   WebAppSecurityGroup:
     Type: AWS::EC2::SecurityGroup
