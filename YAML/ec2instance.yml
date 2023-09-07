@@ -15,7 +15,7 @@ Resources:
           #!/bin/bash
           # Base URL and common paths
           BASE_URL="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204"
-          SCRIPT_NAMES=("update" "install-apache2" "config-ufw-ssh" "config-ufw-apache2" "install-mysql-server")
+          SCRIPT_NAMES=("update" "install-apache2" "config-ufw-ssh" "config-ufw-apache2" "install-mysql-server" "install-expect" "conf-mysql-server")
           SCRIPT_DIR="/home/ubuntu"
           # Download, set permissions, and execute the scripts
           for script_name in "${SCRIPT_NAMES[@]}"; do
