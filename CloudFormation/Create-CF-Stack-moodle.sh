@@ -14,7 +14,7 @@ fi
 aws cloudformation delete-stack --stack-name "moodle-v$i"
 
 # Optional delay to ensure that the stack has been deleted
-sleep 60
+sleep 110
 
 # Download the YAML file into /home/cloudshell-user directory and create a new CloudFormation stack
 curl -o /home/cloudshell-user/ec2instance.yml https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/YAML/ec2instance.yml
