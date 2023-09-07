@@ -12,7 +12,7 @@ Resources:
         - !Ref WebAppSecurityGroup
       UserData:
         Fn::Base64: |
-          #!/bin/bash -xe
+          #!/bin/bash
           # Base URL and common paths
           BASE_URL="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204"
           SCRIPT_NAMES=("update" "install-apache2" "config-ufw-ssh" "config-ufw-apache2")
