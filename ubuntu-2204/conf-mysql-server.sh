@@ -10,7 +10,7 @@ sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_passwo
 sudo mysql_secure_installation <<EOF
 
 # Enter root password1!
-password
+password1!
 
 # Setup VALIDATE PASSWORD component
 y
