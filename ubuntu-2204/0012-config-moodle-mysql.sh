@@ -1,35 +1,30 @@
 #!/bin/bash
 
-# Step 6: Setup MySQL Server
+#!/bin/bash
 
-# Edit MySQL configuration file
-sed -i '/\[mysqld\]/a default_storage_engine = innodb\ninnodb_file_per_table = 1\ninnodb_file_format = Barracuda' /etc/mysql/mysql.conf.d/mysqld.cnf
+# Replace 'YourPasswordHere' with the password you created in step 1
 
-# Restart MySQL to apply changes
-service mysql restart
+MYSQL_ROOT_PASSWORD='1Moodle!'
 
-# MySQL root password
-read -sp "Enter the MySQL root password: " root_password
+# Replace 'passwordformoodledude' with the password of your choosing for the Moodle user
+MOODLE_USER_PASSWORD='MyStr0ng!Passw0rd'
 
-# Moodle database password
-read -sp "Enter the Moodle user password: " moodle_password
+# SQL command to create a new database
+CREATE_DATABASE="CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
-# Create Moodle database
-mysql -u root -p$root_password -e "CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+# SQL command to create a new user
+CREATE_USER="CREATE USER 'moodledude'@'localhost' IDENTIFIED BY '$MOODLE_USER_PASSWORD';"
 
-# Create Moodle user and grant permissions
-mysql -u root -p$root_password -e "CREATE USER 'moodledude'@'localhost' IDENTIFIED BY '$moodle_password';"
-mysql -u root -p$root_password -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle.* TO 'moodledude'@'localhost';"
+# SQL command to grant privileges to the new user
+GRANT_PRIVILEGES="GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle.* TO 'moodledude'@'localhost';"
 
-# Step 7: Complete Setup
+# Execute SQL commands
+mysql -u root -p$MYSQL_ROOT_PASSWORD -e "$CREATE_DATABASE"
+mysql -u root -p$MYSQL_ROOT_PASSWORD -e "$CREATE_USER"
+mysql -u root -p$MYSQL_ROOT_PASSWORD -e "$GRANT_PRIVILEGES"
 
-# Make the Moodle directory writable temporarily
-chmod -R 777 /var/www/html/moodle
+echo "Moodle database and user set up complete."
 
-echo "You can now proceed with the web-based setup. Once done, press any key to continue."
-
-# Wait for user input
-read -n1 -s
 
 # Revert Moodle directory permissions
 chmod -R 0755 /var/www/html/moodle
