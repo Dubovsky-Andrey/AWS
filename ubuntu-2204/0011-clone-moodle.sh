@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Declare variable for Moodle version
-MOODLE="MOODLE_402_STABLE"
+MOODLE="MOODLE_400_STABLE"
 
 # Step 4: Download Moodle
 
