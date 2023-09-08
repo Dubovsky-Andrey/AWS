@@ -8,7 +8,7 @@ apt update -y
 
 add-apt-repository ppa:ondrej/php
 apt update
-apt install php7.4 libapache2-mod-php7.4
+apt install -y php7.4 libapache2-mod-php7.4
 update-alternatives --config php
 
 a2dismod php8.1
