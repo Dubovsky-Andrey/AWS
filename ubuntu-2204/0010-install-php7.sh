@@ -9,7 +9,7 @@ apt update -y
 echo "================================="
 echo "Install mysql-client and php 7 "
 echo "================================="
-apt install -y mysql-client  php7.4 libapache2-mod-php
+apt install -y apache2 mysql-client mysql-server php7.4 libapache2-mod-php
 
 echo "================================="
 echo "Install additional apps"
