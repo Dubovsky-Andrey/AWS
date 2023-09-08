@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Replace 'YourPasswordHere' with the password you created in step 1
 
 MYSQL_ROOT_PASSWORD='1Moodle!'
