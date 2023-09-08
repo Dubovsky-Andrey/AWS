@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Part 1 - Build a webapp stack with CloudFormation
+
+Resources:
+  WebAppInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0a0c8eebcdd6dcbd0 # ImageID valid only in us-east-1 region
+      InstanceType: t4g.small
+      KeyName: kpus1 # <-- Change to use your key-pair name
+      SecurityGroupIds:
+        - !Ref WebAppSecurityGroup
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          # Base URL and common paths
+          BASE_URL="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204"
+          SCRIPT_NAMES=("0001-update-system" "0002-install-apache2" "0003-config-ufw-ssh" "0004-config-ufw-apache2" "0005-install-mysql-server" "0006-install-expect" "0007-conf-mysql-server" "0008-install-php" "0010-install-php7" "0011-clone-moodle" "0012-config-moodle-mysql")
+          SCRIPT_DIR="/home/ubuntu"
+          # Download, set permissions, and execute the scripts
+          for script_name in "${SCRIPT_NAMES[@]}"; do
+            # Download the script
+            wget "${BASE_URL}/${script_name}.sh" -O "${SCRIPT_DIR}/script-${script_name}.sh"
+            # Make the script executable
+            chmod +x "${SCRIPT_DIR}/script-${script_name}.sh"
+            # Execute the script
+            "${SCRIPT_DIR}/script-${script_name}.sh"
+          done
+          
+  WebAppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Join ["-", [webapp-security-group, dev]]
+      GroupDescription: "Allow HTTP/HTTPS and SSH inbound and outbound traffic"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
