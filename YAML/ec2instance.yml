@@ -15,7 +15,7 @@ Resources:
           #!/bin/bash
           # Base URL and common paths
           BASE_URL="https://raw.githubusercontent.com/Dubovsky-Andrey/AWS/main/ubuntu-2204"
-          SCRIPT_NAMES=("0001-update-system" "0002-install-apache2" "0003-config-ufw-ssh" "0004-config-ufw-apache2" "0005-install-mysql-server" "0006-install-expect" "0007-conf-mysql-server" "0008-install-php" "0010-install-php7" "0011-clone-moodle" "0012-config-moodle-mysql")
+          SCRIPT_NAMES=("0001-update-system" "0002-install-apache2" "0003-config-ufw-ssh" "0004-config-ufw-apache2" "0005-install-mysql-server" "0006-install-expect" "0007-conf-mysql-server" "0010-install-php7" "0011-clone-moodle" "0012-config-moodle-mysql")
           SCRIPT_DIR="/home/ubuntu"
           # Download, set permissions, and execute the scripts
           for script_name in "${SCRIPT_NAMES[@]}"; do
