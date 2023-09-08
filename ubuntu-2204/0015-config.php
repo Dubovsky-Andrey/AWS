@@ -1,7 +1,3 @@
-config.php
-Configuration completed
-Moodle made an attempt to save your configuration in a file in the root of your Moodle installation.The installer script was not able to automatically create a config.php file containing your chosen settings, probably because the Moodle directory is not writeable. You can manually copy the following code into a file named config.php within the root directory of Moodle.
-
 <?php  // Moodle configuration file
 
 unset($CFG);
