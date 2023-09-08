@@ -10,11 +10,11 @@ else
   i=1
 fi
 
- aws cloudformation delete-stack --stack-name "moodle-v$i"
 
 # Check if stack exists, if yes, wait 5 seconds and try again
 while aws cloudformation describe-stacks --stack-name "moodle-v$i" &>/dev/null; do
   echo "Stack moodle-v$i already exists. Waiting 5 seconds before checking again."
+  aws cloudformation delete-stack --stack-name "moodle-v$i"
   sleep 5
 done
 
