@@ -28,3 +28,4 @@ aws cloudformation create-stack --template-body file:///home/cloudshell-user/ec2
 
 # Increment the value of i and save it to the file
 echo $(($i + 1)) > $COUNTER_FILE
+
