@@ -6,10 +6,13 @@ echo "================================="
 add-apt-repository ppa:ondrej/php -y
 apt update -y
 
-echo "================================="
-echo "Install mysql-client and php 7 "
-echo "================================="
-apt install -y apache2 mysql-client mysql-server php7.4 libapache2-mod-php
+add-apt-repository ppa:ondrej/php
+apt update
+apt install php7.4 libapache2-mod-php7.4
+update-alternatives --config php
+
+a2dismod php8.1
+a2enmod php7.4
 
 echo "================================="
 echo "Install additional apps"
